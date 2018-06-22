@@ -1,0 +1,23 @@
+
+= content title
+  | Config Query
+= content main
+  h1 查询配置项
+  hr
+
+  div.row
+    div.col-md-6
+      form method=POST action={{URL "config/query"}}
+        div.form-group
+          label Name
+          input.form-control type=text id=name name=name placeholder="Name"
+        div.form-group
+          label Path
+          input.form-control type=text id=path name=path placeholder="Path"
+        div.form-group
+          label Version
+          input.form-control type=text id=version name=version placeholder="Version"
+        div.form-group
+          button.btn.btn-default type=submit 查询
+
+  hr

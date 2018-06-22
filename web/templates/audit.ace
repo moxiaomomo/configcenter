@@ -1,0 +1,23 @@
+= content title
+  | 操作历史
+= content main
+  {{if .Latest}}
+  h1 操作历史
+  hr
+  = include _audit .Latest
+
+  div.row
+    div.col-md-12
+      nav
+        ul class="pager"
+          {{if .Less}}
+          li class="previous"
+            a href="?page={{.Less}}" <span aria-hidden="true">&larr;</span> Older
+          {{end}}
+          {{if .More}}
+          li class="next"
+            a href="?page={{.More}}" Newer <span aria-hidden="true">&rarr;</span>
+          {{end}}
+  {{else}}
+  h3 无更改历史...
+  {{end}}

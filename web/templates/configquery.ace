@@ -1,0 +1,41 @@
+= content title
+  | 配置项
+= content main
+  h1 查询结果: {{.Name}}-{{.Path}}-{{.Version}}
+  hr
+
+  div.row
+    div.col-md-12
+      table.table.table-bordered.table-hover
+        {{range .ConfigSet}}
+          tr
+            th Name
+            td {{.Name}}
+          tr
+            th Path
+            td {{.Path}}
+          tr
+            th Version
+            td {{.Version}}
+          tr
+            th Checksum
+            td {{.ChangeSet.Checksum}}
+          tr
+            th Last Update
+            td {{TimeStamp .UpdatedAt}}
+          tr
+            th Status
+            td style="color:{{ConfColor .Status}};" {{ConfStatus .Status}}
+          tr
+            th Last Comment
+            td {{.Comment}}
+          tr
+            th Data
+            td
+              pre {{JSON .ChangeSet.Data}}
+        {{end}}
+      form method=POST action={{URL "config/edit"}}
+        input.form-control type=text id=name name=name class=tohide value={{.Name}}
+        input.form-control type=text id=path name=path class=tohide value={{.Path}}
+        input.form-control type=text id=version name=version class=tohide value={{.Version}}
+        button.btn.btn-default type=submit 编辑

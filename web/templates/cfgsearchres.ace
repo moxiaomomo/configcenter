@@ -1,0 +1,18 @@
+= content title
+  | 结果集
+= content main
+  h1 搜索结果
+  hr
+
+  {{if .Name}}
+  h1 Results for [ name:{{.Name}}  path:{{.Path}} ]
+  {{else}}
+  h1 所有结果
+  {{end}}
+  hr
+
+  {{if .Results}}
+  = include _results .Results
+  {{else}}
+  h4 结果为空
+  {{end}}

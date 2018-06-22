@@ -1,0 +1,33 @@
+div.row
+  div.col-md-12
+    table.table.table-bordered.table-hover
+      thead
+        tr
+          th Timestamp
+          th Action
+          th Name
+          th Path
+          th Version
+          th Status
+          th Comment
+      tbody
+      {{range $i, $val := .}}
+        tr data-toggle="collapse" data-target="#change-{{$i}}" style="cursor:pointer;"
+          td {{TimeStamp .ConfigSet.UpdatedAt}}
+          td {{.Action}}
+          td {{.ConfigSet.Name}}
+          td {{.ConfigSet.Path}}
+          td {{.ConfigSet.Version}}
+          td style="color:{{ConfColor .ConfigSet.Status}};" {{ConfStatus .ConfigSet.Status}}
+          td {{.ConfigSet.Comment}}
+          tr id="change-{{$i}}" class=collapse
+            td colspan=6
+              table.table.table-bordered.table-hover
+                tr
+                  td Checksum
+                  td {{.ConfigSet.ChangeSet.Checksum}}
+                tr
+                  td Data
+                  td
+                    pre {{JSON .ConfigSet.ChangeSet.Data}}
+      {{end}}

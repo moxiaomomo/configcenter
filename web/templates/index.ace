@@ -1,0 +1,11 @@
+
+= content title
+  | Index
+= content main
+  {{if .Latest}}
+  h1 最近操作记录
+  hr
+  = include _audit .Latest
+  {{else}}
+  h3 无操作记录...
+  {{end}}

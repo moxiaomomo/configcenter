@@ -1,0 +1,31 @@
+= content title
+  | 新建配置项
+= content main
+  h1 新建配置项
+
+  div.row
+    div.col-md-6
+      form method=POST action={{URL "/config/create"}}
+        div.form-group
+          label Name
+          input.form-control type=text id=name name=name placeholder="Name"   
+        div.form-group
+          label Path
+          input.form-control type=text id=path name=path placeholder="Path"
+        div.form-group
+          label Version
+          input.form-control type=text id=version name=version value="1.0"
+        div.form-group
+          label Status
+          select.form-control id=status name=status
+            {{range $k, $v := .CreateStatus}}
+              option value={{$k}} {{$v}}
+            {{end}}
+        div.form-group
+          label Comment
+          input.form-control type=text id=comment name=comment placeholder="Comment"
+        div.form-group
+          label Config (JSON)
+          textarea.form-control id=config name=config rows=20 placeholder=""
+        div.form-group
+          button.btn.btn-default type=submit 确认创建

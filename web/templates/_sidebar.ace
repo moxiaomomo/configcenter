@@ -1,0 +1,12 @@
+
+ul.nav.nav-sidebar
+  li.h4
+    a href={{URL "/index"}} 首页
+  li
+    a href={{URL "/config/index"}} 查询/更改
+  li
+    a href={{URL "/config/create"}} 新建配置项
+  li
+    a href={{URL "/config/search"}} 搜索配置项
+  li
+    a href={{URL "/audit/log"}} 历史记录

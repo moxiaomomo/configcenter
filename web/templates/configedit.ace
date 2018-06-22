@@ -1,0 +1,38 @@
+= content title
+  | 更新配置项
+= content main
+  h1 编辑: {{.Name}}-{{.Path}}-{{.Version}}
+  hr
+
+  div.row
+    div.col-md-6
+      form method=POST action={{URL "config/update"}}
+        {{range .ConfigSet}}
+          div.form-group
+            label Name
+            input.form-control type=text id=name name=name placeholder="Name" value={{.Name}} readonly="true"
+          div.form-group
+            label Path
+            input.form-control type=text id=path name=path placeholder="Path (optional)" value={{.Path}} readonly="true"
+          div.form-group
+            label Version
+            input.form-control type=text id=version name=version placeholder="Version" value={{.Version}} readonly="true"
+          div.form-group
+            label Status
+            select.form-control id=status name=status
+              {{range $k, $v := $.ConfStatus}}
+                {{if eq $.Status $k}}
+                  option value={{$k}} selected=true {{$v}}
+                {{else}}
+                  option value={{$k}} {{$v}}
+                {{end}}
+              {{end}}
+          div.form-group
+            label Comment
+            input.form-control type=text id=comment name=comment placeholder="Comment" value={{.Comment}}
+          div.form-group
+            label Config (JSON)
+            textarea.form-control id=config name=config rows=20 value=pre {{JSON .ChangeSet.Data}}
+          div.form-group
+            button.btn.btn-default type=submit 提交更改
+        {{end}}

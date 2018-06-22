@@ -1,0 +1,17 @@
+= content title
+  | 搜索
+= content main
+  h1 搜索配置项
+  hr
+
+  div.row
+    div.col-md-6
+      form method=POST action={{URL "/config/search"}}
+        div.form-group
+          label Name
+          input.form-control type=text id=name name=name placeholder="Name"
+        div.form-group
+          label Path
+          input.form-control type=text id=path name=path placeholder="Path (可选)"
+        div.form-group
+          button.btn.btn-default type=submit Search
