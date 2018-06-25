@@ -30,12 +30,11 @@ func NewRouter() http.Handler {
 }
 
 // Start start server
-func Start(port int) error {
-	portString := fmt.Sprintf(":%d", port)
-	logString := fmt.Sprintf("config-web start and listen on port %d...", port)
+func Start(lbhost string, curhost string) error {
+	logString := fmt.Sprintf("config-web start and listen on %s", curhost)
 	logger.Info(logString)
 
-	conn, err := grpc.Dial("127.0.0.1:"+string(port), grpc.WithInsecure())
+	conn, err := grpc.Dial(lbhost, grpc.WithInsecure())
 	if err != nil {
 		logger.Error("failed to start server as rpc-client initiation failed.")
 	}
@@ -43,10 +42,10 @@ func Start(port int) error {
 		"exts/configsrv/web/templates",
 		proto.NewConfigClient(conn),
 	)
-	return http.ListenAndServe(portString, NewRouter())
+	return http.ListenAndServe(curhost, NewRouter())
 }
 
 // AsyncStart aync-start server
-func AsyncStart(port int) {
-	go Start(port)
+func AsyncStart(lbhost string, curhost string) {
+	go Start(lbhost, curhost)
 }

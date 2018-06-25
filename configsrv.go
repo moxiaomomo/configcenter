@@ -25,7 +25,8 @@ const (
 	ERR_REQ_SERVER_FAILED = -2
 	ERR_PUBMSG_FAILED     = -3
 
-	WEB_UI_PORT = 8765
+	WEB_UI_HOST = "127.0.0.1:8765"
+	REG_LB_HOST = "127.0.0.1:4000"
 )
 
 func (c *Config) Read(ctx context.Context, req *proto.ReadRequest, rsp *proto.ReadResponse) error {
@@ -196,7 +197,7 @@ func NewPlugin(pconf *config.RawYaml) (pluginer.SrvPluginer, error) {
 func (s *Config) Init(srv *service.Service) error {
 	proto.RegisterConfigHandler(srv.Server, s)
 	db.Init()
-	web.AsyncStart(WEB_UI_PORT)
+	web.AsyncStart(REG_LB_HOST, WEB_UI_HOST)
 	// subscribe config watch topic, to continully receive config updated
 	srv.Server.Subscribe(srv.Server.NewSubscriber(watch.WatchTopic, watch.Watcher))
 	return nil

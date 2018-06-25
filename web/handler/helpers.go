@@ -124,7 +124,6 @@ func distanceOfTime(minutes float64) string {
 	default:
 		return fmt.Sprintf("%d days", int(minutes/1440))
 	}
-	return ""
 }
 
 func prettyJSON(d string) string {
